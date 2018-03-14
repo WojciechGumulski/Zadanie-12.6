@@ -11,18 +11,22 @@ function searchCountries() {
   		method: 'GET',
   		success: showCountriesList
   	});
-};
+}
 
 function showCountriesList(resp) {
-  	countriesList.empty();
+    var countries = [];
+  	
   	resp.forEach(function(item) {
-        $('<li>').text(item.name).appendTo(countriesList);
-        $('<h3>').text('Capital:').appendTo(countriesList);
-        $('<p>').text(item.capital).appendTo(countriesList);
-        $('<h3>').text('Region:').appendTo(countriesList);
-        $('<p>').text(item.region).appendTo(countriesList);
-        $('<h3>').text('Flag:').appendTo(countriesList);
-        $('<img>').attr('src', item.flag).appendTo(countriesList);
+        var element = $('<li>').text(item.name);
+        $('<h3>').text('Capital:').appendTo(element);
+        $('<p>').text(item.capital).appendTo(element);
+        $('<h3>').text('Region:').appendTo(element);
+        $('<p>').text(item.region).appendTo(element);
+        $('<h3>').text('Flag:').appendTo(element);
+        $('<img>').attr('src', item.flag).appendTo(element);
        
+       countries.push(element);
     });
-};
+
+    countriesList.empty().append(countries);
+}
